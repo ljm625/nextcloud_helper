@@ -24,7 +24,7 @@ def load_folder_data():
 
 def save_folder_data(data):
     with open("/tmp/nextcloud_scan_info.json", "w+") as file:
-        json.dump(file,data)
+        json.dump(data,file)
 
 
 
