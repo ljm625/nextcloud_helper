@@ -27,11 +27,17 @@ def save_folder_data(data):
         json.dump(data,file)
 
 
+def validate_path(chname):
+    for achar in ("'",'"','*','?','~','`','!','#','$','&','|','{','}',';','<','>','^',' ','(',')','[',']'):
+        chname = chname.replace(achar,'\\' + achar)
+    return chname
+
+
 
 def check_for_changes(path):
     regex = r" *\| *([0-9]+) *\| *([0-9]+) *\| *([0-9\:]+)"
     rescan = False
-    output = execute_command(rescan_command.format(php_path=config["php_path"],occ_path=config["occ_path"],dir=path))
+    output = execute_command(rescan_command.format(php_path=config["php_path"],occ_path=config["occ_path"],dir=validate_path(path)))
     if output:
         output_lines = output.split("\n")
         for line in output_lines:
@@ -51,7 +57,7 @@ def check_for_changes(path):
         return rescan
 
 def generate_preview(path):
-    output = execute_command(preview_generate_command.format(php_path=config["php_path"],occ_path=config["occ_path"],dir=path))
+    output = execute_command(preview_generate_command.format(php_path=config["php_path"],occ_path=config["occ_path"],dir=validate_path(path)))
     if output:
         return True
     else:
