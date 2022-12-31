@@ -1,0 +1,7 @@
+enable_memories: true
+enable_preview_generate: true
+php_path: "php"
+occ_path: "/var/www/nextcloud/occ"
+scan_paths:
+  - "/xxxa/files/Photos"
+  - "/xxxb/files/Photos"
