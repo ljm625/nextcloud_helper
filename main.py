@@ -37,8 +37,8 @@ def check_for_changes(path):
         for line in output_lines:
             result = re.match(regex,line)
             if result:
-                folders = int(result.group(0))
-                files = int(result.group(1))
+                folders = int(result.group(1))
+                files = int(result.group(2))
                 print(f"Path: {path} Folders: {folders} Files: {files}")
                 if scan_data.get(path):
                     if files > scan_data[path]:
