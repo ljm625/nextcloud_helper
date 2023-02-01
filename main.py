@@ -7,6 +7,7 @@ import os
 rescan_command = "{php_path} {occ_path} files:scan --path={dir}"
 preview_generate_command = "{php_path} {occ_path} preview:generate-all --path={dir}"
 memories_command = "{php_path} {occ_path} memories:index"
+recognize_recrawl_command = "{php_path} {occ_path} recognize:recrawl"
 curdir = os.path.split(os.path.realpath(__file__))[0]
 def load_config(name):
     with open(os.path.join(curdir,name)) as file:
@@ -72,6 +73,13 @@ def generate_memories_index():
         print(f"Issue on Generating Memories, please check")
         return False
 
+def recognize_recrawl():
+    output = execute_command(recognize_recrawl_command.format(php_path=config["php_path"],occ_path=config["occ_path"]))
+    if output:
+        return True
+    else:
+        print(f"Issue on Recrwal, please check")
+        return False
 
 
 def execute_command(command):
@@ -96,6 +104,8 @@ if __name__ == '__main__':
             memories_re_index = True
     if memories_re_index and config["enable_memories"]:
         generate_memories_index()
+        if config["enable_recognize"]:
+            recognize_recrawl()
     save_folder_data(scan_data)
     print("All Done")
 
