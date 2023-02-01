@@ -7,9 +7,9 @@ import os
 rescan_command = "{php_path} {occ_path} files:scan --path={dir}"
 preview_generate_command = "{php_path} {occ_path} preview:generate-all --path={dir}"
 memories_command = "{php_path} {occ_path} memories:index"
-
+curdir = os.path.split(os.path.realpath(__file__))[0]
 def load_config(name):
-    with open(name) as file:
+    with open(os.path.join(curdir,name)) as file:
         config = yaml.load(file.read(),Loader = yaml.FullLoader)
         return config
 
